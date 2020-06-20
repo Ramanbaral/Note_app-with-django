@@ -1,0 +1,52 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note</title>
+    <link rel="stylesheet" href="{%static  'bootstrap.css'%}">
+    <style>
+      #title{
+        width: 497px;
+        height: 37px;
+        margin-bottom: 13px;
+      }
+      .content-center{
+        margin-left: 33vw;
+      }
+      #addbtn{
+        margin-left: 13vw;
+      }
+      .note{
+        width: 300px;
+        border:1px solid black
+      }
+    </style>
+</head>
+<body>
+                      <!-- NAVBAR starts HERE -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <a class="navbar-brand" href="{%url 'note-home'%}">Note</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{%url 'note-home'%}">Home <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+<div class="content-center">
+      <form  method="POST">
+        {%csrf_token%}
+          {{form.as_p}}
+        <button  id='addbtn' class="btn btn-primary mt-3" type="submit">Update</button>
+      </form>
+    </div>
+  </div>
+<hr>
+</body>
+</html>

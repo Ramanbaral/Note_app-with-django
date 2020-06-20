@@ -1,0 +1,100 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note</title>
+    <link rel="stylesheet" href="{%static  'bootstrap.css'%}">
+    <style>
+      #title{
+        width: 497px;
+        height: 37px;
+        margin-bottom: 13px;
+      }
+      .content-center{
+        margin-left: 33vw;
+      }
+      #addbtn{
+        margin-left: 13vw;
+      }
+      .note{
+        width: 300px;
+        border:1px solid black
+      }
+      .neo{
+     
+     margin:0px 17px;
+     /* max-height: 400px; */
+     background-color: rgb(238, 238, 238);
+     border-radius: 20px;
+     box-shadow: -3px -3px 3px rgba(228, 223, 223, 0.931),
+     3px 3px 10px rgba(51, 50, 50, 0.931);
+ }
+ .row{
+   display: flex;
+   justify-content:space-around;
+ }
+
+     @keyframes deleteani{
+        from{
+          opacity: 1;
+        }
+        to{
+          opacity: 0;
+        }
+      }
+      .delani{
+        animation-name:deleteani;
+        animation-duration: 10s;
+        animation-iteration-count: 1;
+        animation-fill-mode: forwards;
+        animation-play-state: paused;
+      } 
+    </style>
+</head>
+<body>
+                      <!-- NAVBAR starts HERE -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <a class="navbar-brand" href="{%url 'note-home'%}">Note</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="{%url 'note-home'%}">Home <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+          <form class="form-inline mt-2 mt-md-0" method="GET" action="/search">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+      </nav>
+                          <!-- NAVBAR ends HERE -->
+<h1 class="text-center">Search Results:</h1>
+  <div class="container mt-4 ">
+    <!-- Example row of columns -->
+    <div class="row">
+
+      {%for note in notes%}
+      <div class="col-md-3 mb-4 neo pb-1 delani">
+        <h2>{{note.title}}</h2>
+        <p>{{note.body}}</p>
+        <a class="btn btn-outline-info" href="{%url 'note-update' note.id%}" role="button">Update</a>
+        <a class="btn btn-outline-danger ml-3" href="{%url 'note-delete' note.id%}" role="button" id="delete">Delete</a>
+      </div>
+      {%endfor%}
+
+    </div>
+
+    <script>
+      let delbtn=document.querySelectorAll('#delete')
+      delbtn.addEventListener('click',()=>{
+        delbtn.parentElement.style.animationPlayState='running';
+        console.log('running')
+      })
+    </script>
+</body>
+</html>
